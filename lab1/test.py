@@ -1,10 +1,7 @@
 import numpy as np
 import pickle
 from createtree import datainput
-
-def grabtree(filename):
-    fr=open(filename,'rb')#需要制定'rb'，以byte形式读取
-    return pickle.load(fr)
+from visual import grabtree
 
 def judgelabel(decisiontree, data):
     key, = decisiontree
