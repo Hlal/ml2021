@@ -20,6 +20,7 @@ def datainput(filename,attr_num=60):            #读取文件数据
             temp[i] = d[temp[i]]
         t.append(temp)
     datamatrix = np.array(t)
+    fr.close()
     #print(datamatrix)
     return datamatrix
 
@@ -61,6 +62,7 @@ def createtree(datamatrix):
         id = datamatrix[:,minefeature]==i
         #print(i, datamatrix[:,:][id])
         if(datamatrix[:,:][id].size==0):
+            decisiontree['BASE' + str(minefeature)][i] = np.int32(np.argmax(np.bincount(datamatrix[:,-1])))  #无法划分时，输出样本中元素最多的分类
             continue
         decisiontree['BASE' + str(minefeature)][i] = createtree(datamatrix[:,:][id])
     return decisiontree

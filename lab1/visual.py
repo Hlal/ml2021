@@ -19,23 +19,23 @@ def visualization(decisiontree, g, parentnode=None, att=None):
             visualization(decisiontree[key][k], g, key, k)
     else:
         #print(type(parentnode), type(key), type(att))
-        sun = parentnode+str(att)+key
-        g.node(sun, label=key)
-        g.edge(parentnode, sun, label=d[int(att)])
+        son = parentnode+str(att)+key
+        g.node(son, label=key)
+        g.edge(parentnode, son, label=d[int(att)])
         for k in decisiontree[key]:
             if isinstance(decisiontree[key][k], np.int32):
-                end = sun + str(k) + str(decisiontree[key][k])
+                end = son + str(k) + str(decisiontree[key][k])
                 g.node(end, label=str(decisiontree[key][k]))
-                g.edge(sun, end, label=d[k])
+                g.edge(son, end, label=d[k])
             else:
-                visualization(decisiontree[key][k], g, sun, str(k))
+                visualization(decisiontree[key][k], g, son, str(k))
 
 def main():
 
     g = Digraph("Decision Tree", filename='.\data\ID3-DT',format='png')
     g.attr('node', shape='box')
     decisiontree = grabtree(filename='.\data\decisiontree')
-    print(decisiontree)
+    #print(decisiontree)
     visualization(decisiontree, g)
     g.view()
 
